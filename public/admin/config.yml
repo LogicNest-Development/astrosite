@@ -3,7 +3,7 @@ backend:
   name: github
   repo: LogicNest-Development/astrosite
   branch: main
-  base_url: "https://cms-auth.YOUR_DOMAIN:4081"
+  base_url: "https://cms-auth.logicnest.biz"
   auth_endpoint: "auth"
 
 media_folder: "public/uploads"

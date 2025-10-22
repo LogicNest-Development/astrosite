@@ -1,12 +1,13 @@
 services:
   decap-oauth:
-    image: ghcr.io/vencax/netlify-cms-github-oauth-provider:latest
+    image: ramank775/netlify-cms-github-oauth-provider:v1.1.0
     environment:
-      CLIENT_ID: "GITHUB_CLIENT_ID"           # ← CHANGE
-      CLIENT_SECRET: "GITHUB_CLIENT_SECRET"   # ← CHANGE
-      OAUTH_HOST: "https://cms-auth.YOUR_DOMAIN:4081"
-      OAUTH_REDIRECT_URI: "https://cms-auth.YOUR_DOMAIN:4081/callback"
-      ALLOWED_ORIGINS: "https://YOUR_DOMAIN"  # add www if needed: https://YOUR_DOMAIN,https://www.YOUR_DOMAIN
+      NODE_ENV: "production"
+      ORIGINS: "https://logicnest.biz,https://www.logicnest.biz"
+      OAUTH_CLIENT_ID: "Ov23li5yzDQpR1LaMJ2G"
+      OAUTH_CLIENT_SECRET: "503b3fbe67105dfa6bcf316d351a2e302e9a9329"
+      REDIRECT_URL: "https://cms-auth.logicnest.biz/callback"
+      PORT: "3111"
     ports:
-      - "127.0.0.1:8088:8080"
+      - "127.0.0.1:8088:3111"
     restart: always
