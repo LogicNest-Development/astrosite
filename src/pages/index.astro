@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import Features from "../components/Features.astro";
+import Pricing from "../components/Pricing.astro";
+---
+<Layout title="LogicNest Networks — Hosting for communities & creators" description="Game servers, TeamSpeak/Mumble, and Discord bots. Simple pricing, DDoS protection, backups included.">
+  <Fragment slot="header"><Header /></Fragment>
+  <Hero />
+  <Features />
+  <Pricing />
+  <Fragment slot="footer"><Footer /></Fragment>
+</Layout>

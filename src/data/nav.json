@@ -1,0 +1,56 @@
+{
+  "clientAreaUrl": "/client",
+  "items": [
+    {
+      "key": "web",
+      "label": "Web",
+      "enabled": true,
+      "type": "page",
+      "path": "/web"
+    },
+    {
+      "key": "games",
+      "label": "Games",
+      "enabled": true,
+      "type": "page",
+      "path": "/games"
+    },
+    {
+      "key": "servers",
+      "label": "Servers",
+      "enabled": true,
+      "type": "page",
+      "path": "/servers"
+    },
+    {
+      "key": "discord-bots",
+      "label": "Discord Bots",
+      "enabled": true,
+      "type": "page",
+      "path": "/discord-bots"
+    },
+    {
+      "key": "teamspeak",
+      "label": "TeamSpeak",
+      "enabled": true,
+      "type": "page",
+      "path": "/teamspeak"
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "enabled": true,
+      "type": "external",
+      "path": "https://status.logicnest.biz",
+      "external": true
+    },
+    {
+      "key": "discord",
+      "label": "Discord",
+      "enabled": true,
+      "type": "external",
+      "path": "https://discord.gg/YOURINVITE",
+      "external": true
+    }
+  ]
+}

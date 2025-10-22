@@ -1,0 +1,13 @@
+---
+import nav from "../data/nav.json";
+const status = "https://status.yourdomain.tld"; // optional override with env if desired
+const clientArea = nav.clientAreaUrl || "/client";
+---
+<section class="container-section py-16 md:py-24 text-center">
+  <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">LogicNest Networks</h1>
+  <p class="mt-4 text-muted max-w-2xl mx-auto">Hosting for communities & creators</p>
+  <div class="mt-8 flex justify-center gap-4">
+    {clientArea && <a href={clientArea} class="btn-primary">Get Started</a>}
+    <a href={status} class="opacity-90 hover:opacity-100 underline">Status</a>
+  </div>
+</section>
