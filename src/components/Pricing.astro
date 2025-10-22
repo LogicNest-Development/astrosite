@@ -3,44 +3,44 @@ import data from "../data/pricing.json";
 const games = data.games ?? [];
 const ts = data.teamspeak ?? [];
 const bots = data.discord ?? [];
-function Money({value}:{value:number}) {
-  return <span>${value.toFixed(2)}</span>
-}
+
+// simple currency formatter for use in expressions
+const money = (n: number) => `$${(n ?? 0).toFixed(2)}`;
 ---
 <section class="container-section py-12 md:py-16">
   <h2 class="text-3xl font-bold mb-6">Game Hosting</h2>
   <div class="grid md:grid-cols-2 gap-6 mb-12">
-    {games.map(p => (
+    {games.map((p) => (
       <div class="rounded-2xl border border-white/10 p-6 shadow-ring">
         <h3 class="text-xl font-semibold mb-2">{p.slug.toUpperCase()}</h3>
         <p class="text-muted mb-2">{p.ram} GB RAM • {p.storage}</p>
-        <div class="text-3xl font-bold"><Money value={p.price} /></div>
+        <div class="text-3xl font-bold">{money(p.price)}</div>
       </div>
     ))}
   </div>
 
   <h2 class="text-3xl font-bold mb-6">TeamSpeak</h2>
   <div class="grid md:grid-cols-2 gap-6 mb-12">
-    {ts.map(p => (
+    {ts.map((p) => (
       <div class="rounded-2xl border border-white/10 p-6 shadow-ring">
         <h3 class="text-xl font-semibold mb-2">{p.slug.toUpperCase()}</h3>
         <p class="text-muted mb-2">{p.slots} slots</p>
-        <div class="text-3xl font-bold"><Money value={p.price} /></div>
+        <div class="text-3xl font-bold">{money(p.price)}</div>
       </div>
     ))}
   </div>
 
   <h2 class="text-3xl font-bold mb-6">Discord Bots</h2>
   <div class="grid md:grid-cols-2 gap-6">
-    {bots.map(p => (
+    {bots.map((p) => (
       <div class="rounded-2xl border border-white/10 p-6 shadow-ring">
         <h3 class="text-xl font-semibold mb-2">{p.slug.toUpperCase()}</h3>
-        {p.features?.length && (
+        {p.features?.length ? (
           <ul class="list-disc pl-5 text-muted mb-2">
-            {p.features.map(f => <li>{f}</li>)}
+            {p.features.map((f) => <li>{f}</li>)}
           </ul>
-        )}
-        <div class="text-3xl font-bold"><Money value={p.price} /></div>
+        ) : null}
+        <div class="text-3xl font-bold">{money(p.price)}</div>
       </div>
     ))}
   </div>
