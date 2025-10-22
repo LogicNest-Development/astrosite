@@ -1,13 +1,27 @@
+
 services:
   decap-oauth:
     image: ramank775/netlify-cms-github-oauth-provider:v1.1.0
     environment:
       NODE_ENV: "production"
-      ORIGINS: "https://logicnest.biz,https://www.logicnest.biz"
+
+      # REQUIRED (plural): hostnames only, comma-separated
+      ORIGINS: "logicnest.biz,www.logicnest.biz"
+
+      # GitHub OAuth App credentials
       OAUTH_CLIENT_ID: "Ov23li5yzDQpR1LaMJ2G"
       OAUTH_CLIENT_SECRET: "503b3fbe67105dfa6bcf316d351a2e302e9a9329"
+
+      # Must match your OAuth App callback URL exactly
       REDIRECT_URL: "https://cms-auth.logicnest.biz/callback"
+
+      # IMPORTANT: use full URL with scheme
+      GIT_HOSTNAME: "https://github.com"
+
+      # Internal port the app listens on
       PORT: "3111"
+
+    # Bind only on localhost; CloudPanel/Nginx proxies it
     ports:
       - "127.0.0.1:8088:3111"
     restart: always

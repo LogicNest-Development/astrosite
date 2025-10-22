@@ -1,0 +1,86 @@
+
+backend:
+  name: github
+  repo: LogicNest-Development/astrosite
+  branch: main
+  base_url: "https://cms-auth.logicnest.biz"
+  auth_endpoint: "auth"
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "nav"
+    label: "Navigation"
+    format: "json"
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: "nav"
+        label: "Main Navigation"
+        file: "src/data/nav.json"
+        fields:
+          - { name: "clientAreaUrl", label: "Client Area URL", widget: "string", required: false }
+          - name: "items"
+            label: "Items"
+            label_singular: "Item"
+            widget: "list"
+            summary: "{{fields.label}} → {{fields.path}}"
+            fields:
+              - { name: "key", label: "Key", widget: "string" }
+              - { name: "label", label: "Label", widget: "string" }
+              - { name: "enabled", label: "Enabled", widget: "boolean", default: true, required: false }
+              - name: "type"
+                label: "Type"
+                widget: "select"
+                options: ["page","section","external"]
+                default: "page"
+              - { name: "path", label: "Path / #anchor / URL", widget: "string" }
+              - { name: "external", label: "Open in new tab", widget: "boolean", required: false }
+
+  - name: "services"
+    label: "Services"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} ({{enabled}})"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "enabled", label: "Enabled", widget: "boolean", default: true }
+      - { name: "path", label: "Route Path (e.g., /web)", widget: "string" }
+      - { name: "order", label: "Order", widget: "number", default: 1, required: false }
+      - { name: "summary", label: "Summary", widget: "text", required: false }
+      - { name: "hero", label: "Hero Text", widget: "text", required: false }
+      - { name: "body", label: "Page Body", widget: "markdown", required: false }
+
+  - name: "product-groups"
+    label: "Product Groups"
+    folder: "src/content/product-groups"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "summary", label: "Summary", widget: "text", required: false }
+      - { name: "hero", label: "Hero Text", widget: "text", required: false }
+      - { name: "enabled", label: "Enabled", widget: "boolean", default: true }
+      - { name: "showInNav", label: "Show in Header", widget: "boolean", default: false }
+      - { name: "order", label: "Order", widget: "number", default: 100 }
+
+  - name: "products"
+    label: "Products"
+    folder: "src/content/products"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "price", label: "Price (USD)", widget: "number" }
+      - { name: "features", label: "Features", widget: "list", required: false }
+      - { name: "badge", label: "Badge", widget: "string", required: false }
+      - { name: "image", label: "Image URL", widget: "string", required: false }
+      - { name: "ctaUrl", label: "CTA URL", widget: "string", required: false }
+      - { name: "enabled", label: "Enabled", widget: "boolean", default: true }
+      - { name: "group", label: "Group", widget: "relation", collection: "product-groups", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"] }
