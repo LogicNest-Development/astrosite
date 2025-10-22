@@ -1,5 +1,5 @@
 // src/content/settings/site.json
 {
-  "statusUrl": "https://status.logicnest.biz/status/logicnest",
-  "showStatusInNav": false
+  "statusUrl": "https://status.logicnest.biz/status/logicnest/",
+  "showStatusInNav": true
 }
