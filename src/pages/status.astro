@@ -1,0 +1,36 @@
+---
+import { getEntry } from "astro:content";
+
+let statusUrl: string | undefined;
+try {
+  const site = await getEntry("settings", "site");
+  statusUrl = site?.data?.statusUrl;
+} catch {}
+
+const url = statusUrl ?? "https://status.logicnest.biz/status/logicnest"; // fallback if not set
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Status</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl p-4">
+      <h1 class="mb-4 text-2xl font-semibold">Service Status</h1>
+      <div class="aspect-[16/9] w-full overflow-hidden rounded-2xl bg-black">
+        <iframe
+          src={url}
+          class="h-full w-full"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+        ></iframe>
+      </div>
+      <p class="mt-3 text-sm text-neutral-400">
+        If the status page does not display, it may be blocked by the site’s
+        X-Frame-Options/Content-Security-Policy. See notes below.
+      </p>
+    </div>
+  </body>
+</html>
