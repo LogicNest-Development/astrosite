@@ -2,28 +2,39 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
-import { getCollection } from "astro:content";
 import ProductCard from "../../components/ProductCard.astro";
+import { getCollection } from "astro:content";
+
+// Build-time: tell Astro which /products/<slug> pages to generate
+export async function getStaticPaths() {
+  const groups = await getCollection("product-groups", ({ data }) => data.enabled !== false);
+  return groups.map((g) => ({ params: { slug: g.slug } }));
+}
 
 const { slug } = Astro.params;
 
+// Load this group
 const groups = await getCollection("product-groups", ({ slug: s, data }) => s === slug && data.enabled !== false);
 const group = groups[0];
 if (!group) {
   throw Astro.redirect("/");
 }
 
+// Load products in this group
 const items = await getCollection("products", ({ data }) => data.enabled !== false && data.group === slug);
-const products = items.sort((a,b) => (a.data.price ?? 0) - (b.data.price ?? 0));
+const products = items.sort((a, b) => (a.data.price ?? 0) - (b.data.price ?? 0));
 ---
+
 <Layout title={`${group.data.title} • LogicNest`} description={group.data.summary}>
   <Fragment slot="header"><Header /></Fragment>
+
   <section class="container-section py-12 md:py-16">
     <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-center">{group.data.title}</h1>
     {group.data.summary && <p class="mt-4 text-center text-muted max-w-2xl mx-auto">{group.data.summary}</p>}
     <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {products.map(p => <ProductCard product={p.data} />)}
+      {products.map((p) => <ProductCard product={p.data} />)}
     </div>
   </section>
+
   <Fragment slot="footer"><Footer /></Fragment>
 </Layout>
