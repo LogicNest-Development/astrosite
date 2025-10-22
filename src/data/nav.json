@@ -33,9 +33,10 @@
       "key": "status",
       "label": "Status",
       "enabled": true,
-      "path": "/status/"
+      "path": "https://status.logicnest.biz/status/logicnest",
+      "external": true,
+      "type": "external"
     },
-
     {
       "key": "discord",
       "label": "Discord",
