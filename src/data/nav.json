@@ -4,20 +4,13 @@
     {
       "key": "web",
       "label": "Web",
-      "enabled": true,
+      "enabled": false,
       "type": "page",
       "path": "/web"
     },
     {
-      "key": "games",
-      "label": "Games",
-      "enabled": true,
-      "type": "page",
-      "path": "/games"
-    },
-    {
       "key": "servers",
-      "label": "Servers",
+      "label": "VPS",
       "enabled": true,
       "type": "page",
       "path": "/servers"
