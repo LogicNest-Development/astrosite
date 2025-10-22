@@ -28,7 +28,7 @@ jobs:
           ssh-keyscan -H 72.60.172.192 >> ~/.ssh/known_hosts
 
       - name: Deploy via rsync
-        uses: burnett01/rsync-deployments@6.0
+        uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -avzr --delete
           path: dist/
