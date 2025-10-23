@@ -1,0 +1,38 @@
+---
+const { product } = Astro.props as {
+  product: {
+    title: string;
+    price: number;
+    features?: string[];
+    badge?: string;
+    image?: string;
+    ctaUrl?: string;
+  };
+};
+---
+<article class="rounded-2xl border border-white/10 p-6 shadow-ring flex flex-col bg-black/20">
+  {product.badge && (
+    <span class="mb-3 inline-block rounded-full border border-white/15 px-3 py-1 text-xs opacity-90">
+      {product.badge}
+    </span>
+  )}
+
+  <h3 class="text-xl font-semibold">{product.title}</h3>
+  <div class="mt-2 text-3xl font-bold">${product.price.toFixed(2)}</div>
+
+  {product.image && (
+    <img src={product.image} alt={product.title} class="mt-4 rounded-xl border border-white/10" />
+  )}
+
+  {product.features && product.features.length > 0 && (
+    <ul class="mt-4 list-disc pl-5 text-muted space-y-1">
+      {product.features.map((f) => <li>{f}</li>)}
+    </ul>
+  )}
+
+  <div class="mt-auto pt-6">
+    <a href={product.ctaUrl ?? "/contact"} class="btn-primary inline-flex" rel="noopener noreferrer">
+      Purchase Now
+    </a>
+  </div>
+</article>
