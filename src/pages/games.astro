@@ -1,15 +1,14 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import Features from "../components/Features.astro";
+import Layout from "@components/../layouts/Layout.astro";
+import groups from "@content/product-groups/*";
 ---
-<Layout title="Game Hosting • LogicNest" description="Game servers tuned for tick-rate & low latency.">
-  <Fragment slot="header"><Header /></Fragment>
-  <section class="container-section py-12 md:py-16">
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-center">Game Hosting</h1>
-    <p class="mt-4 text-center text-muted max-w-2xl mx-auto">Game servers tuned for tick-rate & low latency.</p>
+<Layout title="All Games & Services">
+  <section class="container py-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {groups.sort((a,b)=> (a.data.order||0)-(b.data.order||0)).map((g)=> (
+      <a href={"/products/" + g.slug} class="card p-6 block hover:bg-white/5">
+        <h3 class="text-xl font-semibold">{g.data.title}</h3>
+        {g.data.summary && <p class="text-white/70 mt-2">{g.data.summary}</p>}
+      </a>
+    ))}
   </section>
-  <Features />
-  <Fragment slot="footer"><Footer /></Fragment>
 </Layout>

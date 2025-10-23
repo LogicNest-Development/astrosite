@@ -1,34 +1,48 @@
 ---
-import nav from "../data/nav.json";
-import { getCollection } from "astro:content";
-const baseItems = (nav.items ?? []).filter((i) => i.enabled !== false);
-const groups = await getCollection("product-groups", ({ data }) => data.enabled !== false && data.showInNav === true);
-const groupLinks = groups
-  .sort((a,b) => (a.data.order ?? 100) - (b.data.order ?? 100))
-  .map(g => ({ key: `group-${g.slug}`, label: g.data.title, path: `/products/${g.slug}`, type: "page" }));
-const items = [...baseItems, ...groupLinks];
-const clientArea = nav.clientAreaUrl;
+import nav from "@data/nav.json";
+const groups = nav.mega || [];
+const top = nav.top || [];
 ---
-<header class="sticky top-0 z-40 border-b border-white/5 bg-bg/80 backdrop-blur">
-  <div class="container-section flex h-16 items-center justify-between">
-    <a href="/" class="flex items-center gap-3">
-      <img src="/logo.png" alt="LogicNest Networks" class="h-8 w-8 rounded-xl shadow-ring" />
-      <span class="text-white font-semibold">LogicNest Networks</span>
+<header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/30">
+  <div class="container flex h-16 items-center justify-between">
+    <a href="/" class="flex items-center gap-2 font-bold">
+      <img src="/logo.png" alt="LogicNest" class="h-7 w-7 rounded" />
+      <span>LogicNest</span>
     </a>
-
     <nav class="hidden md:flex items-center gap-6">
-      {items.map((l) => (
-        <a
-          class="nav-link"
-          href={l.path}
-          target={l.external ? '_blank' : undefined}
-          rel={l.external ? 'noopener' : undefined}
-        >
-          {l.label}
-        </a>
-      ))}
+      <div class="relative group">
+        <button class="text-white/90 hover:text-white">Games ▾</button>
+        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition p-4 absolute left-0 mt-3 w-[700px] rounded-2xl border border-white/10 bg-panel shadow-ring">
+          <div class="grid grid-cols-2 gap-6">
+            {groups.map((g) => (
+              <div>
+                <div class="text-xs uppercase tracking-wide text-white/60 mb-2">{g.title}</div>
+                <ul class="space-y-2">
+                  {(g.items||[]).filter(i=>i.enabled!==false).map((i) => (
+                    <li>
+                      <a href={i.href} class="flex items-center justify-between rounded-xl border border-white/10 p-3 hover:bg-white/5">
+                        <div class="flex items-center gap-3">
+                          <span class="text-xl">{i.icon}</span>
+                          <div>
+                            <div class="font-medium">{i.label}</div>
+                            {i.subtext && <div class="text-xs text-white/60">{i.subtext}</div>}
+                          </div>
+                        </div>
+                        <span class="text-white/40">→</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {top.filter(l=>l.enabled!==false).map((l) => <a href={l.href} class="text-white/80 hover:text-white">{l.label}</a>)}
     </nav>
-
-    {clientArea && <a href={clientArea} class="btn-primary hidden md:inline-flex">Client Area</a>}
+    <div class="flex items-center gap-3">
+      <a href="/admin" class="hidden md:inline text-white/70 hover:text-white">Admin</a>
+      <a href="/contact" class="btn-primary">Contact</a>
+    </div>
   </div>
 </header>

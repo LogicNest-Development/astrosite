@@ -1,0 +1,20 @@
+---
+const { announcement } = Astro.props as {
+  announcement?: { enabled?: boolean; message?: string; href?: string; tone?: "info"|"success"|"warning"|"danger" };
+};
+if (!announcement?.enabled || !announcement.message) return null;
+const tone = announcement.tone ?? "info";
+const tones: Record<string,string> = {
+  info: "bg-blue-600/90",
+  success: "bg-green-600/90",
+  warning: "bg-amber-600/90",
+  danger: "bg-rose-600/90"
+};
+---
+<div class={`w-full ${tones[tone] ?? tones.info}`}>
+  <div class="container py-2 text-center">
+    {announcement.href
+      ? <a href={announcement.href} class="underline-offset-2 hover:underline">{announcement.message}</a>
+      : <span>{announcement.message}</span>}
+  </div>
+</div>

@@ -1,17 +1,26 @@
 ---
-const { title = 'LogicNest Networks', description = 'Hosting for communities & creators' } = Astro.props;
-import "../styles/tailwind.css";
+import site from "@content/settings/site.json";
+import AnnouncementBanner from "@components/AnnouncementBanner.astro";
+import Header from "@components/Header.astro";
+const { title = "LogicNest" } = Astro.props;
 ---
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f1115">
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/src/styles/tailwind.css" />
   </head>
-  <body class="min-h-screen bg-grad text-white">
-    <slot name="header" />
-    <main><slot /></main>
-    <slot name="footer" />
+  <body class="bg-ink text-white">
+    <AnnouncementBanner announcement={site.announcement} />
+    <Header />
+    <main class="pb-24">{Astro.slots.default?.()}</main>
+    <footer class="border-t border-white/10 py-10 text-center text-white/60">
+      <div class="container">© {new Date().getFullYear()} LogicNest</div>
+    </footer>
   </body>
 </html>

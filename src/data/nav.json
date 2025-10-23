@@ -1,49 +1,17 @@
 {
-  "clientAreaUrl": "/client",
-  "items": [
-    {
-      "key": "web",
-      "label": "Web",
-      "enabled": false,
-      "type": "page",
-      "path": "/web"
-    },
-    {
-      "key": "servers",
-      "label": "VPS",
-      "enabled": true,
-      "type": "page",
-      "path": "/servers"
-    },
-    {
-      "key": "discord-bots",
-      "label": "Discord Bots",
-      "enabled": true,
-      "type": "page",
-      "path": "/discord-bots"
-    },
-    {
-      "key": "teamspeak",
-      "label": "TeamSpeak",
-      "enabled": true,
-      "type": "page",
-      "path": "/teamspeak"
-    },
-    {
-      "key": "status",
-      "label": "Status",
-      "enabled": true,
-      "path": "https://status.logicnest.biz/status/logicnest",
-      "external": true,
-      "type": "external"
-    },
-    {
-      "key": "discord",
-      "label": "Discord",
-      "enabled": true,
-      "type": "external",
-      "path": "https://discord.gg/HyUrcdYrAx",
-      "external": true
-    }
+  "mega": [
+    {"title":"Popular","items":[
+      {"label":"FiveM Hosting","icon":"🚓","subtext":"NVMe only","href":"/products/fivem","enabled":true},
+      {"label":"Minecraft Hosting","icon":"🟩","subtext":"NVMe only","href":"/products/minecraft","enabled":true}
+    ]},
+    {"title":"More","items":[
+      {"label":"TeamSpeak","icon":"🎙️","subtext":"Voice servers","href":"/products/teamspeak","enabled":true},
+      {"label":"Discord Bots","icon":"🤖","subtext":"PM2/Docker","href":"/products/discord-bots","enabled":true},
+      {"label":"Bundles","icon":"🧰","subtext":"Game + Web + Bot/TS","href":"/products/bundles","enabled":true}
+    ]}
+  ],
+  "top": [
+    {"label":"Games","href":"/games","enabled":true},
+    {"label":"Legal","href":"/legal","enabled":true}
   ]
 }

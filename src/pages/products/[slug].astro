@@ -1,40 +1,39 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import ProductCard from "../../components/ProductCard.astro";
-import { getCollection } from "astro:content";
+import Layout from "@components/../layouts/Layout.astro";
+import ProductCard from "@components/ProductCard.astro";
+import groups from "@content/product-groups/*";
+import products from "@content/products/*";
 
-// Build-time: tell Astro which /products/<slug> pages to generate
 export async function getStaticPaths() {
-  const groups = await getCollection("product-groups", ({ data }) => data.enabled !== false);
   return groups.map((g) => ({ params: { slug: g.slug } }));
 }
 
 const { slug } = Astro.params;
-
-// Load this group
-const groups = await getCollection("product-groups", ({ slug: s, data }) => s === slug && data.enabled !== false);
-const group = groups[0];
-if (!group) {
-  throw Astro.redirect("/");
-}
-
-// Load products in this group
-const items = await getCollection("products", ({ data }) => data.enabled !== false && data.group === slug);
-const products = items.sort((a, b) => (a.data.price ?? 0) - (b.data.price ?? 0));
+const group = groups.find(g => g.slug === slug);
+const list = products.filter(p => p.data.group === slug && p.data.enabled !== false);
 ---
-
-<Layout title={`${group.data.title} • LogicNest`} description={group.data.summary}>
-  <Fragment slot="header"><Header /></Fragment>
-
-  <section class="container-section py-12 md:py-16">
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-center">{group.data.title}</h1>
-    {group.data.summary && <p class="mt-4 text-center text-muted max-w-2xl mx-auto">{group.data.summary}</p>}
-    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {products.map((p) => <ProductCard product={p.data} />)}
+<Layout title={`${group?.data.title ?? "Products"} — LogicNest`}>
+  <section class="container py-12">
+    <h1 class="text-3xl font-bold">{group?.data.title}</h1>
+    {group?.data.hero && <p class="mt-2 text-white/70">{group.data.hero}</p>}
+    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {list.map((p) => <ProductCard product={{ ...p.data }} />)}
     </div>
   </section>
 
-  <Fragment slot="footer"><Footer /></Fragment>
+  <section class="container mt-12">
+    <h2 class="text-2xl font-semibold">FAQs</h2>
+    <div class="mt-4 space-y-3">
+      {Astro.glob("../../content/faqs/*.md").then(mods => 
+        mods.filter(m => m.frontmatter.tag === (group?.data.faqTag || "global"))
+      ).then(items => items.flatMap(i => i.frontmatter.items)).then(items => 
+        items?.map((qa) => (
+          <details class="card p-4">
+            <summary class="cursor-pointer font-medium">{qa.q}</summary>
+            <div class="mt-2 text-white/70 prose prose-invert" set:html={qa.a}></div>
+          </details>
+        ))
+      )}
+    </div>
+  </section>
 </Layout>

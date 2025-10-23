@@ -1,0 +1,38 @@
+name: Build & Deploy (Astro)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Add host key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 72.60.172.192 >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@7.0
+        with:
+          switches: -avzr --delete
+          path: dist/
+          remote_path: ~/htdocs/logicnest.biz/
+          remote_host: 72.60.172.192
+          remote_user: logicnest
+          remote_key: ${{ secrets.DEPLOY_SSH_KEY }}

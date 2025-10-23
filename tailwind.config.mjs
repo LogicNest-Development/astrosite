@@ -1,16 +1,13 @@
-/**** Tailwind config ****/
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
-      colors: {
-        bg: '#0b1220',
-      },
+      colors: { ink: "#0b1020", panel: "#0f162b" },
       boxShadow: {
-        ring: '0 0 0 1px rgba(255,255,255,.08), 0 10px 30px rgba(0,0,0,.35)'
+        ring: "0 0 0 1px rgba(255,255,255,.06), 0 10px 25px -5px rgba(0,0,0,.45)"
       }
-    },
+    }
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography')]
 }

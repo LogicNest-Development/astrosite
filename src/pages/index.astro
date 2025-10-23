@@ -1,15 +1,21 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import Hero from "../components/Hero.astro";
-import Features from "../components/Features.astro";
-import Pricing from "../components/Pricing.astro";
+import Layout from "@components/../layouts/Layout.astro";
 ---
-<Layout title="LogicNest Networks — Hosting for communities & creators" description="Game servers, TeamSpeak/Mumble, and Discord bots. Simple pricing, DDoS protection, backups included.">
-  <Fragment slot="header"><Header /></Fragment>
-  <Hero />
-  <Features />
-  <Pricing />
-  <Fragment slot="footer"><Footer /></Fragment>
+<Layout title="LogicNest — NVMe Game Hosting">
+  <section class="container py-16 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Fast, clean, <span class="text-blue-400">NVMe</span> hosting for games & communities.</h1>
+      <p class="mt-4 text-white/70">FiveM, Minecraft, TeamSpeak, and Discord Bots with 1-click tooling, backups, and rock-solid DDoS filtering.</p>
+      <div class="mt-6 flex gap-3">
+        <a class="btn-primary" href="/products/fivem">Browse Plans</a>
+        <a class="btn-primary bg-white/10 hover:bg-white/20" href="/legal">Legal</a>
+      </div>
+    </div>
+    <div class="card p-6">
+      <div class="prose prose-invert">
+        <h3>Status</h3>
+        <iframe src="https://status.logicnest.biz/status/logicnest" class="w-full h-72 rounded-xl border border-white/10"></iframe>
+      </div>
+    </div>
+  </section>
 </Layout>
