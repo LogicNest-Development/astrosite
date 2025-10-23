@@ -1,0 +1,7 @@
+# OS junk
+.DS_Store
+__MACOSX/
+# build
+dist/
+# logs
+npm-debug.log*
