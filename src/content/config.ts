@@ -39,7 +39,8 @@ const legal = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    updated: z.string().optional()
+    // find the legal collection schema and change the updated line to:
+    updated: z.union([z.string(), z.date()]).optional(),
   })
 });
 
