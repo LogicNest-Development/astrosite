@@ -7,6 +7,7 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -15,16 +16,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
+      # Use npm install since there's no package-lock.json
       - name: Install deps
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Build
         run: npm run build
 
       - name: Add server host key
         run: |
-          mkdir -p ~/.ssh
+          install -m 700 -d ~/.ssh
           ssh-keyscan -H 72.60.172.192 >> ~/.ssh/known_hosts
 
       - name: Deploy via rsync
