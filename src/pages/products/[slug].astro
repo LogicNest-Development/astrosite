@@ -1,34 +1,38 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import ProductCard from "../../components/ProductCard.astro";
 import { getCollection } from "astro:content";
-import ProductCard from "@components/ProductCard.astro";
 
-const { slug } = Astro.params;
-const groups = await getCollection("product-groups");
-const group = groups.find(g => g.slug === slug);
-
-if (!group) {
-  throw new Error("Group not found");
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+  return products.map((p) => ({ params: { slug: p.slug } }));
 }
 
-const products = (await getCollection("products"))
-  .filter(p => p.data.group === group.slug && p.data.enabled !== false);
+const { slug } = Astro.params;
+
+// Find the matching product entry by slug
+const products = await getCollection("products");
+const entry = products.find((p) => p.slug === slug);
+
+if (!entry) {
+  throw new Error(`Product not found: ${slug}`);
+}
+
+const { Content } = await entry.render();
+const data = entry.data;
+const title = data.title ?? entry.slug;
 ---
-<Layout title={`${group.data.title} — LogicNest`}>
-  <section class="container py-12">
-    <h1 class="text-3xl font-bold">{group.data.title}</h1>
-    {group.data.summary && <p class="text-muted mt-2">{group.data.summary}</p>}
-    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {products.map(p => (
-        <ProductCard product={{
-          title: p.data.title,
-          price: p.data.price,
-          features: p.data.features,
-          badge: p.data.badge,
-          image: p.data.image,
-          ctaUrl: p.data.ctaUrl
-        }} />
-      ))}
+
+<Layout title={`${title} — LogicNest`}>
+  <section class="container py-12 grid md:grid-cols-3 gap-8">
+    <div class="md:col-span-2 prose prose-invert">
+      <h1 class="text-3xl font-semibold mb-4">{title}</h1>
+      <Content />
     </div>
+
+    <aside class="md:col-span-1">
+      <!-- Pass all frontmatter fields to ProductCard; it will pick what it needs -->
+      <ProductCard {...data} />
+    </aside>
   </section>
 </Layout>
