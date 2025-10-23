@@ -1,4 +1,5 @@
 ---
+title: "Minecraft"
 {
   "tag": "minecraft",
   "items": [

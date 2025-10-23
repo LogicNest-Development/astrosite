@@ -1,4 +1,5 @@
 ---
+title: "Bots"
 {
   "tag": "bots",
   "items": [

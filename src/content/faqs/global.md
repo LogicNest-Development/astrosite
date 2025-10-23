@@ -1,4 +1,5 @@
 ---
+title: "Global"
 {
   "tag": "global",
   "items": [

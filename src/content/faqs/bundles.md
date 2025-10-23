@@ -1,4 +1,5 @@
 ---
+title: "Bundles"
 {
   "tag": "bundles",
   "items": [

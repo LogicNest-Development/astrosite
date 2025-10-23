@@ -1,4 +1,5 @@
 ---
+title: "Teamspeak"
 {
   "tag": "teamspeak",
   "items": [
