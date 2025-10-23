@@ -1,44 +1,46 @@
-// src/content/config.ts
-import { defineCollection, z } from "astro:content";
+import { defineCollection, z } from 'astro:content';
 
-const productGroups = defineCollection({
-  type: "content",
+const group = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     summary: z.string().optional(),
+    hero: z.string().optional(),
     enabled: z.boolean().default(true),
-    // NEW: default link for products in this group (fallback)
-    defaultPurchaseUrl: z.string().url().optional(),
-  }),
+    showInNav: z.boolean().default(false),
+    order: z.number().default(100),
+    faqTag: z.string().optional()
+  })
 });
 
-const products = defineCollection({
-  type: "content",
+const product = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
-    price: z.number().optional(),
-    // whatever you use to associate to a group (slug/name)
-    group: z.string(),
+    price: z.number(),
+    features: z.array(z.string()).optional(),
+    badge: z.string().optional(),
+    image: z.string().optional(),
+    ctaUrl: z.string().optional(),
     enabled: z.boolean().default(true),
-    // NEW: per-product purchase link and custom CTA label
-    purchaseUrl: z.string().url().optional(),
-    ctaLabel: z.string().default("Purchase now").optional(),
-    // optional: productId if you build URLs from IDs later
-    productId: z.string().optional(),
-  }),
+    group: z.string()
+  })
 });
 
-const settings = defineCollection({
-  type: "data",
+const faqs = defineCollection({
+  type: 'content',
   schema: z.object({
-    // NEW: status page URL to embed
-    statusUrl: z.string().url().optional(),
-    showStatusInNav: z.boolean().default(true).optional(),
-  }),
+    tag: z.string(),
+    items: z.array(z.object({ q: z.string(), a: z.string() }))
+  })
 });
 
-export const collections = {
-  "product-groups": productGroups,
-  products,
-  settings,
-};
+const legal = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    updated: z.string().optional()
+  })
+});
+
+export const collections = { "product-groups": group, products: product, faqs, legal };

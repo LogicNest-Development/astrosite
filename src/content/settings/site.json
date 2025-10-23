@@ -1,4 +1,7 @@
 {
-  "statusUrl": "https://status.logicnest.biz/",
-  "showStatusInNav": true
+  "clientAreaUrl": "https://clients.logicnest.biz",
+  "discordUrl": "https://discord.gg/WJjxRwsX57",
+  "statusUrl": "https://status.logicnest.biz/status/logicnest",
+  "logo": "/logo.png",
+  "announcement": { "enabled": true, "message": "🚀 New: NVMe plans live across FiveM & Minecraft!", "href": "/games", "tone": "info" }
 }
