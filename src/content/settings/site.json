@@ -1,7 +1,8 @@
 {
-  "clientAreaUrl": "https://clients.logicnest.biz",
-  "discordUrl": "https://discord.gg/WJjxRwsX57",
-  "statusUrl": "https://status.logicnest.biz/status/logicnest",
-  "logo": "/logo.png",
-  "announcement": { "enabled": true, "message": "🚀 New: NVMe plans live across FiveM & Minecraft!", "href": "/games", "tone": "info" }
+  "siteName": "LogicNest",
+  "tagline": "Game hosting that just works.",
+  "discordUrl": "https://discord.gg/your-server",
+  "clientAreaUrl": "https://billing.logicnest.biz",
+  "showBanner": false,
+  "bannerText": "Scheduled maintenance Sat 2AM UTC."
 }

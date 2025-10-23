@@ -1,47 +1,58 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
-const group = defineCollection({
-  type: 'content',
+const productGroups = defineCollection({
+  type: "content",
   schema: z.object({
     title: z.string(),
     summary: z.string().optional(),
     hero: z.string().optional(),
     enabled: z.boolean().default(true),
     showInNav: z.boolean().default(false),
-    order: z.number().default(100),
-    faqTag: z.string().optional()
+    order: z.number().default(100)
   })
 });
 
-const product = defineCollection({
-  type: 'content',
+const products = defineCollection({
+  type: "content",
   schema: z.object({
     title: z.string(),
     price: z.number(),
     features: z.array(z.string()).optional(),
     badge: z.string().optional(),
     image: z.string().optional(),
-    ctaUrl: z.string().optional(),
+    ctaUrl: z.string().url().optional(), // external or internal
     enabled: z.boolean().default(true),
     group: z.string()
   })
 });
 
 const faqs = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
-    tag: z.string(),
-    items: z.array(z.object({ q: z.string(), a: z.string() }))
+    title: z.string(),
+    order: z.number().optional()
   })
 });
 
 const legal = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     title: z.string(),
-    // find the legal collection schema and change the updated line to:
-    updated: z.union([z.string(), z.date()]).optional(),
+    // Allow either string or date for updated
+    updated: z.union([z.string(), z.date()]).optional()
   })
 });
 
-export const collections = { "product-groups": group, products: product, faqs, legal };
+const settings = defineCollection({
+  type: "data",
+  schema: z.object({
+    siteName: z.string(),
+    tagline: z.string().optional(),
+    discordUrl: z.string().url().optional(),
+    clientAreaUrl: z.string().url().optional(),
+    showBanner: z.boolean().default(false),
+    bannerText: z.string().optional()
+  })
+});
+
+export const collections = { products, "product-groups": productGroups, faqs, legal, settings };

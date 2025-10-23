@@ -1,9 +1,8 @@
 ---
-title: TeamSpeak Hosting
-summary: Low-latency voice with automatic backups.
-hero: Reliable performance. Instant setup.
+title: "TeamSpeak Hosting"
+summary: "Low-latency voice for squads and communities."
 enabled: true
-showInNav: true
-order: 30
-faqTag: teamspeak
+showInNav: false
+order: 4
 ---
+

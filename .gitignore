@@ -3,5 +3,8 @@
 __MACOSX/
 # build
 dist/
-# logs
+# node
+node_modules/
 npm-debug.log*
+# envs
+.env

@@ -1,5 +1,6 @@
 ---
-title: Terms of Service
-updated: "2025-10-22"
+title: "Terms of Service"
+updated: "2025-01-01"
 ---
-Your ToS text here…
+
+**Welcome to LogicNest.** By using our services you agree to these terms...

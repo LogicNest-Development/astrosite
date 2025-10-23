@@ -1,5 +1,6 @@
 ---
-title: Refund Policy
-updated: "2025-10-22"
+title: "Refund Policy"
+updated: "2025-01-01"
 ---
-Your Refund Policy text here…
+
+Refunds are evaluated within 7 days of purchase for unused resources...

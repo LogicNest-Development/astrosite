@@ -9,26 +9,6 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 collections:
-  - name: "settings"
-    label: "Site Settings"
-    files:
-      - name: "site"
-        label: "Global"
-        file: "src/content/settings/site.json"
-        fields:
-          - { name: "clientAreaUrl", label: "Client Area URL", widget: "string" }
-          - { name: "discordUrl", label: "Discord URL", widget: "string" }
-          - { name: "statusUrl", label: "Status URL", widget: "string", required: false }
-          - { name: "logo", label: "Header Logo", widget: "image", required: false }
-          - label: "Announcement Banner"
-            name: "announcement"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { name: "enabled", label: "Enabled", widget: "boolean", default: false }
-              - { name: "message", label: "Message", widget: "string", required: false }
-              - { name: "href", label: "Optional Link", widget: "string", required: false }
-              - { name: "tone", label: "Tone", widget: "select", options: ["info","success","warning","danger"], default: "info" }
   - name: "nav"
     label: "Navigation"
     format: "json"
@@ -36,30 +16,34 @@ collections:
     editor: { preview: false }
     files:
       - name: "nav"
-        label: "Header Menu"
+        label: "Main Navigation"
         file: "src/data/nav.json"
         fields:
-          - name: "mega"
-            label: "Mega Menu Groups"
+          - { name: "clientAreaUrl", label: "Client Area URL", widget: "string", required: false }
+          - name: "items"
+            label: "Items"
+            label_singular: "Item"
             widget: "list"
+            summary: "{{fields.label}} → {{fields.path}}"
             fields:
-              - { name: "title", label: "Group Title", widget: "string" }
-              - name: "items"
-                label: "Links"
+              - { name: "key", label: "Key", widget: "string" }
+              - { name: "label", label: "Label", widget: "string" }
+              - { name: "enabled", label: "Enabled", widget: "boolean", default: true, required: false }
+              - name: "type"
+                label: "Type"
+                widget: "select"
+                options: ["page","section","external"]
+                default: "page"
+              - { name: "path", label: "Path / #anchor / URL", widget: "string", required: false }
+              - { name: "external", label: "Open in new tab", widget: "boolean", required: false }
+              - name: "children"
+                label: "Dropdown Items"
                 widget: "list"
+                required: false
                 fields:
                   - { name: "label", label: "Label", widget: "string" }
-                  - { name: "icon", label: "Icon (emoji ok)", widget: "string", required: false }
-                  - { name: "subtext", label: "Subtext", widget: "string", required: false }
-                  - { name: "href", label: "URL", widget: "string" }
-                  - { name: "enabled", label: "Enabled", widget: "boolean", default: true }
-          - name: "top"
-            label: "Top Bar Links"
-            widget: "list"
-            fields:
-              - { name: "label", label: "Label", widget: "string" }
-              - { name: "href", label: "URL", widget: "string" }
-              - { name: "enabled", label: "Enabled", widget: "boolean", default: true }
+                  - { name: "path", label: "Path / URL", widget: "string" }
+
   - name: "product-groups"
     label: "Product Groups"
     folder: "src/content/product-groups"
@@ -73,7 +57,7 @@ collections:
       - { name: "enabled", label: "Enabled", widget: "boolean", default: true }
       - { name: "showInNav", label: "Show in Header", widget: "boolean", default: false }
       - { name: "order", label: "Order", widget: "number", default: 100 }
-      - { name: "faqTag", label: "FAQ Tag", widget: "string", required: false }
+
   - name: "products"
     label: "Products"
     folder: "src/content/products"
@@ -88,7 +72,8 @@ collections:
       - { name: "image", label: "Image URL", widget: "string", required: false }
       - { name: "ctaUrl", label: "CTA URL", widget: "string", required: false }
       - { name: "enabled", label: "Enabled", widget: "boolean", default: true }
-      - { name: "group", label: "Group", widget: "relation", collection: "product-groups", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"] }
+      - { name: "group", label: "Group (slug)", widget: "relation", collection: "product-groups", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"] }
+
   - name: "faqs"
     label: "FAQs"
     folder: "src/content/faqs"
@@ -96,13 +81,9 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     fields:
-      - { name: "tag", label: "Tag", widget: "string" }
-      - name: "items"
-        label: "Questions"
-        widget: "list"
-        fields:
-          - { name: "q", label: "Question", widget: "string" }
-          - { name: "a", label: "Answer (Markdown)", widget: "markdown" }
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "body", label: "Body", widget: "markdown", required: false }
+
   - name: "legal"
     label: "Legal"
     folder: "src/content/legal"
@@ -110,6 +91,23 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     fields:
-      - { name: "title", label: "Document Title", widget: "string" }
-      - { name: "updated", label: "Last Updated", widget: "datetime", required: false }
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "updated", label: "Updated", widget: "datetime", required: false }
       - { name: "body", label: "Body", widget: "markdown" }
+
+  - name: "settings"
+    label: "Site Settings"
+    format: "json"
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: "site"
+        label: "Site"
+        file: "src/content/settings/site.json"
+        fields:
+          - { name: "siteName", label: "Site Name", widget: "string" }
+          - { name: "tagline", label: "Tagline", widget: "string", required: false }
+          - { name: "discordUrl", label: "Discord URL", widget: "string", required: false }
+          - { name: "clientAreaUrl", label: "Client Area URL", widget: "string", required: false }
+          - { name: "showBanner", label: "Show Announcement", widget: "boolean", default: false }
+          - { name: "bannerText", label: "Announcement Text", widget: "string", required: false }

@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const groups = (await getCollection("product-groups"))
+  .filter(g => g.data.enabled !== false)
+  .sort((a,b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+---
+<Layout title="Games — LogicNest">
+  <section class="container py-12">
+    <h1 class="text-3xl font-bold">Games & Categories</h1>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {groups.map(g => (
+        <a href={`/products/${g.slug}`} class="card p-5 hover:bg-white/5 transition">
+          <div class="text-lg font-semibold">{g.data.title}</div>
+          <p class="text-muted mt-1">{g.data.summary}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

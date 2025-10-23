@@ -7,5 +7,7 @@
       "@content/*": ["src/content/*"],
       "@data/*": ["src/data/*"]
     }
-  }
+  },
+  "include": ["src", "astro.config.mjs", "env.d.ts"],
+  "exclude": ["dist", "node_modules"]
 }

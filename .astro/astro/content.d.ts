@@ -140,19 +140,254 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"product-groups": {
-"game-hosting.md": {
-	id: "game-hosting.md";
-  slug: "game-hosting";
+		"faqs": {
+"bots.md": {
+	id: "bots.md";
+  slug: "bots";
+  body: string;
+  collection: "faqs";
+  data: InferEntrySchema<"faqs">
+} & { render(): Render[".md"] };
+"bundles.md": {
+	id: "bundles.md";
+  slug: "bundles";
+  body: string;
+  collection: "faqs";
+  data: InferEntrySchema<"faqs">
+} & { render(): Render[".md"] };
+"fivem.md": {
+	id: "fivem.md";
+  slug: "fivem";
+  body: string;
+  collection: "faqs";
+  data: InferEntrySchema<"faqs">
+} & { render(): Render[".md"] };
+"global.md": {
+	id: "global.md";
+  slug: "global";
+  body: string;
+  collection: "faqs";
+  data: InferEntrySchema<"faqs">
+} & { render(): Render[".md"] };
+"minecraft.md": {
+	id: "minecraft.md";
+  slug: "minecraft";
+  body: string;
+  collection: "faqs";
+  data: InferEntrySchema<"faqs">
+} & { render(): Render[".md"] };
+"teamspeak.md": {
+	id: "teamspeak.md";
+  slug: "teamspeak";
+  body: string;
+  collection: "faqs";
+  data: InferEntrySchema<"faqs">
+} & { render(): Render[".md"] };
+};
+"legal": {
+"refund.md": {
+	id: "refund.md";
+  slug: "refund";
+  body: string;
+  collection: "legal";
+  data: InferEntrySchema<"legal">
+} & { render(): Render[".md"] };
+"sla.md": {
+	id: "sla.md";
+  slug: "sla";
+  body: string;
+  collection: "legal";
+  data: InferEntrySchema<"legal">
+} & { render(): Render[".md"] };
+"tos.md": {
+	id: "tos.md";
+  slug: "tos";
+  body: string;
+  collection: "legal";
+  data: InferEntrySchema<"legal">
+} & { render(): Render[".md"] };
+};
+"product-groups": {
+"bundles.md": {
+	id: "bundles.md";
+  slug: "bundles";
+  body: string;
+  collection: "product-groups";
+  data: InferEntrySchema<"product-groups">
+} & { render(): Render[".md"] };
+"discord-bots.md": {
+	id: "discord-bots.md";
+  slug: "discord-bots";
+  body: string;
+  collection: "product-groups";
+  data: InferEntrySchema<"product-groups">
+} & { render(): Render[".md"] };
+"fivem.md": {
+	id: "fivem.md";
+  slug: "fivem";
+  body: string;
+  collection: "product-groups";
+  data: InferEntrySchema<"product-groups">
+} & { render(): Render[".md"] };
+"minecraft.md": {
+	id: "minecraft.md";
+  slug: "minecraft";
+  body: string;
+  collection: "product-groups";
+  data: InferEntrySchema<"product-groups">
+} & { render(): Render[".md"] };
+"teamspeak.md": {
+	id: "teamspeak.md";
+  slug: "teamspeak";
   body: string;
   collection: "product-groups";
   data: InferEntrySchema<"product-groups">
 } & { render(): Render[".md"] };
 };
 "products": {
-"fivem-4gb.md": {
-	id: "fivem-4gb.md";
-  slug: "fivem-4gb";
+"bundles-bronze-bundle.md": {
+	id: "bundles-bronze-bundle.md";
+  slug: "bundles-bronze-bundle";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"bundles-gold-bundle.md": {
+	id: "bundles-gold-bundle.md";
+  slug: "bundles-gold-bundle";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"bundles-silver-bundle.md": {
+	id: "bundles-silver-bundle.md";
+  slug: "bundles-silver-bundle";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"discord-bots-pro.md": {
+	id: "discord-bots-pro.md";
+  slug: "discord-bots-pro";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"discord-bots-start.md": {
+	id: "discord-bots-start.md";
+  slug: "discord-bots-start";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"discord-bots-ultimate.md": {
+	id: "discord-bots-ultimate.md";
+  slug: "discord-bots-ultimate";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"fivem-core-4g.md": {
+	id: "fivem-core-4g.md";
+  slug: "fivem-core-4g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"fivem-plus-6g.md": {
+	id: "fivem-plus-6g.md";
+  slug: "fivem-plus-6g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"fivem-pro-8g.md": {
+	id: "fivem-pro-8g.md";
+  slug: "fivem-pro-8g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"fivem-scale-12g.md": {
+	id: "fivem-scale-12g.md";
+  slug: "fivem-scale-12g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"fivem-starter-2g.md": {
+	id: "fivem-starter-2g.md";
+  slug: "fivem-starter-2g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"fivem-ultra-16g.md": {
+	id: "fivem-ultra-16g.md";
+  slug: "fivem-ultra-16g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"minecraft-diamond-8g.md": {
+	id: "minecraft-diamond-8g.md";
+  slug: "minecraft-diamond-8g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"minecraft-gold-6g.md": {
+	id: "minecraft-gold-6g.md";
+  slug: "minecraft-gold-6g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"minecraft-iron-4g.md": {
+	id: "minecraft-iron-4g.md";
+  slug: "minecraft-iron-4g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"minecraft-netherite-12g.md": {
+	id: "minecraft-netherite-12g.md";
+  slug: "minecraft-netherite-12g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"minecraft-stone-2g.md": {
+	id: "minecraft-stone-2g.md";
+  slug: "minecraft-stone-2g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"minecraft-titan-16g.md": {
+	id: "minecraft-titan-16g.md";
+  slug: "minecraft-titan-16g";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"teamspeak-pro-64-slots.md": {
+	id: "teamspeak-pro-64-slots.md";
+  slug: "teamspeak-pro-64-slots";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"teamspeak-start-32-slots.md": {
+	id: "teamspeak-start-32-slots.md";
+  slug: "teamspeak-start-32-slots";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"teamspeak-ultimate-128-slots.md": {
+	id: "teamspeak-ultimate-128-slots.md";
+  slug: "teamspeak-ultimate-128-slots";
   body: string;
   collection: "products";
   data: InferEntrySchema<"products">
@@ -162,7 +397,14 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		
+		"settings": {
+"site": {
+	id: "site";
+  collection: "settings";
+  data: InferEntrySchema<"settings">
+};
+};
+
 	};
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;

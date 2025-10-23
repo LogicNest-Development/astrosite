@@ -1,5 +1,6 @@
 ---
-title: SLA
-updated: "2025-10-22"
+title: "Service Level Agreement"
+updated: "2025-01-01"
 ---
-Your SLA text here…
+
+We target 99.9% monthly uptime. Credits apply when availability falls below this threshold...

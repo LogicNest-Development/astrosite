@@ -1,21 +1,40 @@
 ---
-import Layout from "@components/../layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import ProductCard from "@components/ProductCard.astro";
+
+const groups = (await getCollection("product-groups"))
+  .filter(g => g.data.enabled !== false)
+  .sort((a,b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const products = (await getCollection("products"))
+  .filter(p => p.data.enabled !== false);
 ---
-<Layout title="LogicNest — NVMe Game Hosting">
-  <section class="container py-16 grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Fast, clean, <span class="text-blue-400">NVMe</span> hosting for games & communities.</h1>
-      <p class="mt-4 text-white/70">FiveM, Minecraft, TeamSpeak, and Discord Bots with 1-click tooling, backups, and rock-solid DDoS filtering.</p>
-      <div class="mt-6 flex gap-3">
-        <a class="btn-primary" href="/products/fivem">Browse Plans</a>
-        <a class="btn-primary bg-white/10 hover:bg-white/20" href="/legal">Legal</a>
-      </div>
+<Layout title="LogicNest — Game Hosting">
+  <section class="container py-16">
+    <h1 class="text-4xl font-bold">Game hosting that just works.</h1>
+    <p class="text-muted mt-3 max-w-2xl">NVMe-only nodes, DDoS filtering, 1-click installs, and a clean client area.</p>
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {products.slice(0,6).map(p => <ProductCard product={{
+        title: p.data.title,
+        price: p.data.price,
+        features: p.data.features,
+        badge: p.data.badge,
+        image: p.data.image,
+        ctaUrl: p.data.ctaUrl
+      }} />)}
     </div>
-    <div class="card p-6">
-      <div class="prose prose-invert">
-        <h3>Status</h3>
-        <iframe src="https://status.logicnest.biz/status/logicnest" class="w-full h-72 rounded-xl border border-white/10"></iframe>
-      </div>
+  </section>
+
+  <section class="container py-12">
+    <h2 class="text-2xl font-semibold mb-4">Categories</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {groups.map(g => (
+        <a href={`/products/${g.slug}`} class="card p-5 hover:bg-white/5 transition">
+          <div class="text-lg font-semibold">{g.data.title}</div>
+          <p class="text-muted mt-1">{g.data.summary}</p>
+        </a>
+      ))}
     </div>
   </section>
 </Layout>

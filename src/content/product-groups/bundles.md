@@ -1,9 +1,8 @@
 ---
-title: Game Server Bundles
-summary: FiveM + Web + Discord Bot/TeamSpeak bundles.
-hero: Reliable performance. Instant setup.
+title: "Game Server Bundles"
+summary: "FiveM + Web + Bot/TS with backups and DB."
 enabled: true
 showInNav: true
-order: 50
-faqTag: bundles
+order: 5
 ---
+

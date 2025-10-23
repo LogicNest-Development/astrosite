@@ -1,9 +1,8 @@
 ---
-title: Minecraft Hosting (NVMe only)
-summary: Paper/Purpur, Fabric, Forge, Waterfall/Velocity. Auto-backups, SFTP, crash restarts.
-hero: Reliable performance. Instant setup.
+title: "Minecraft Hosting"
+summary: "One-click Paper, Purpur, Fabric, Forge & more. Crash auto-restart."
 enabled: true
 showInNav: true
-order: 20
-faqTag: minecraft
+order: 2
 ---
+

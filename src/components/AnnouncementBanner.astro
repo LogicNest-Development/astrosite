@@ -1,20 +1,14 @@
 ---
-const { announcement } = Astro.props as {
-  announcement?: { enabled?: boolean; message?: string; href?: string; tone?: "info"|"success"|"warning"|"danger" };
-};
-if (!announcement?.enabled || !announcement.message) return null;
-const tone = announcement.tone ?? "info";
-const tones: Record<string,string> = {
-  info: "bg-blue-600/90",
-  success: "bg-green-600/90",
-  warning: "bg-amber-600/90",
-  danger: "bg-rose-600/90"
-};
+import { getEntry } from "astro:content";
+const site = await getEntry("settings", "site");
+const data = site?.data;
+if (!data?.showBanner) {
+  // Render nothing
+  return;
+}
 ---
-<div class={`w-full ${tones[tone] ?? tones.info}`}>
-  <div class="container py-2 text-center">
-    {announcement.href
-      ? <a href={announcement.href} class="underline-offset-2 hover:underline">{announcement.message}</a>
-      : <span>{announcement.message}</span>}
+<div class="w-full bg-brand-600/20 border-b border-white/10">
+  <div class="container py-2 text-center text-sm">
+    {data.bannerText}
   </div>
 </div>

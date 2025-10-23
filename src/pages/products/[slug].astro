@@ -1,41 +1,33 @@
 ---
-// src/pages/products/[slug].astro
 import Layout from "../../layouts/Layout.astro";
-import ProductCard from "../../components/ProductCard.astro";
-import { getCollection, getEntryBySlug } from "astro:content";
+import { getCollection } from "astro:content";
+import ProductCard from "@components/ProductCard.astro";
 
 const { slug } = Astro.params;
+const groups = await getCollection("product-groups");
+const group = groups.find(g => g.slug === slug);
 
-// Load the product group by slug
-const group = await getEntryBySlug("product-groups", slug);
 if (!group) {
-  throw new Error(`Product group "${slug}" not found`);
+  throw new Error("Group not found");
 }
 
-// Load products that belong to this group
-const products = (await getCollection(
-  "products",
-  ({ data }) => data.enabled !== false && data.group === slug
-)).sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const products = (await getCollection("products"))
+  .filter(p => p.data.group === group.slug && p.data.enabled !== false);
 ---
-
-<Layout title={group.data.title}>
-  <section class="max-w-6xl mx-auto px-6 py-12">
+<Layout title={`${group.data.title} — LogicNest`}>
+  <section class="container py-12">
     <h1 class="text-3xl font-bold">{group.data.title}</h1>
-    {group.data.hero && <p class="mt-3 opacity-80">{group.data.hero}</p>}
-
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {products.map((p) => (
-        <ProductCard
-          product={{
-            title: p.data.title,
-            price: p.data.price,
-            features: p.data.features,
-            badge: p.data.badge,
-            image: p.data.image,
-            ctaUrl: p.data.ctaUrl
-          }}
-        />
+    {group.data.summary && <p class="text-muted mt-2">{group.data.summary}</p>}
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {products.map(p => (
+        <ProductCard product={{
+          title: p.data.title,
+          price: p.data.price,
+          features: p.data.features,
+          badge: p.data.badge,
+          image: p.data.image,
+          ctaUrl: p.data.ctaUrl
+        }} />
       ))}
     </div>
   </section>
