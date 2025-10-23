@@ -3,6 +3,6 @@
   "tagline": "A hosting company that cares.",
   "discordUrl": "https://discord.gg/HyUrcdYrAx",
   "clientAreaUrl": "https://clients.logicnest.biz",
-  "showBanner": false,
+  "showBanner": true,
   "bannerText": "Scheduled maintenance Sat 2AM UTC."
 }
