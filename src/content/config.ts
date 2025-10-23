@@ -20,7 +20,7 @@ const products = defineCollection({
     features: z.array(z.string()).optional(),
     badge: z.string().optional(),
     image: z.string().optional(),
-    ctaUrl: z.string().url().optional(), // external or internal
+    ctaUrl: z.string().optional(), // external or internal
     enabled: z.boolean().default(true),
     group: z.string()
   })
