@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "eyebrow": "Fast as a Rocket",
+    "title": "Game Hosting, the LogicNest way",
+    "subtitle": "Low latency worldwide, DDoS protection, and a control panel that doesn't fight you.",
+    "primaryCta": { "label": "View Plans", "href": "/products" },
+    "secondaryCta": { "label": "Join Discord", "href": "https://discord.gg/logicnest" }
+  },
+  "plansRow": [
+    {
+      "slug": "minecraft-iron-4g",
+      "name": "6 GB RAM",
+      "price": 6.50,
+      "unit": "/mo",
+      "popular": true,
+      "features": ["NVMe storage", "Unlimited slots", "DDoS protected"]
+    },
+    {
+      "slug": "minecraft-gold-6g",
+      "name": "8 GB RAM",
+      "price": 8.50,
+      "unit": "/mo",
+      "popular": false,
+      "features": ["NVMe storage", "Unlimited slots", "DDoS protected"]
+    },
+    {
+      "slug": "minecraft-netherite-12g",
+      "name": "12 GB RAM",
+      "price": 12.95,
+      "unit": "/mo",
+      "popular": false,
+      "features": ["NVMe storage", "Unlimited slots", "DDoS protected"]
+    }
+  ]
+}

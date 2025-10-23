@@ -1,25 +1,48 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}"],
+  content: [
+    "./src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}",
+    "./public/**/*.html"
+  ],
+  darkMode: ["class"],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1rem",
+        lg: "2rem",
+        xl: "2.5rem",
+        "2xl": "3rem",
+      },
+      screens: { "2xl": "1200px" }
+    },
     extend: {
       colors: {
-        brand: {
-          DEFAULT: "#7C3AED",
-          50: "#F5F3FF",
-          100: "#EDE9FE",
-          200: "#DDD6FE",
-          300: "#C4B5FD",
-          400: "#A78BFA",
-          500: "#8B5CF6",
-          600: "#7C3AED",
-          700: "#6D28D9"
+        ln: {
+          bg: "#0b1220",
+          bgSoft: "#0f1a2e",
+          primary: "#2F6FFF",   /* neon LogicNest blue */
+          primaryDim: "#214FCC",
+          ring: "#67A3FF",
+          text: "#D7E3FF",
+          muted: "#96A1B5",
+          card: "#0f1626",
+          border: "#1b2640",
+          badge: "#13213a"
         }
       },
       boxShadow: {
-        ring: "0 0 0 1px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.35)"
+        "brand": "0 0 32px rgba(47,111,255,0.35)",
+        "card": "0 10px 30px rgba(0,0,0,0.35)"
+      },
+      borderRadius: {
+        xl: "0.9rem",
+        "2xl": "1.25rem"
       }
     }
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [
+    require("@tailwindcss/typography")
+  ],
 };

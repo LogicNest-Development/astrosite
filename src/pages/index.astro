@@ -1,40 +1,69 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import ProductCard from "@components/ProductCard.astro";
+import home from "../data/home.json";
 
-const groups = (await getCollection("product-groups"))
-  .filter(g => g.data.enabled !== false)
-  .sort((a,b) => (a.data.order ?? 0) - (b.data.order ?? 0));
-
-const products = (await getCollection("products"))
-  .filter(p => p.data.enabled !== false);
+const plans = home.plansRow;
 ---
-<Layout title="LogicNest — Game Hosting">
-  <section class="container py-16">
-    <h1 class="text-4xl font-bold">Game hosting that just works.</h1>
-    <p class="text-muted mt-3 max-w-2xl">NVMe-only nodes, DDoS filtering, 1-click installs, and a clean client area.</p>
-    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {products.slice(0,6).map(p => <ProductCard product={{
-        title: p.data.title,
-        price: p.data.price,
-        features: p.data.features,
-        badge: p.data.badge,
-        image: p.data.image,
-        ctaUrl: p.data.ctaUrl
-      }} />)}
+
+<Layout title="LogicNest — Fast, reliable game hosting" description={home.hero.subtitle}>
+  <!-- Hero -->
+  <section class="container py-16 md:py-24">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="chip mb-4">{home.hero.eyebrow}</div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight">
+          {home.hero.title}
+        </h1>
+        <p class="mt-4 text-lg text-ln-text/80 max-w-prose">
+          {home.hero.subtitle}
+        </p>
+        <div class="mt-8 flex items-center gap-3">
+          <a href={home.hero.primaryCta.href} class="btn btn-primary">{home.hero.primaryCta.label}</a>
+          <a href={home.hero.secondaryCta.href} class="btn btn-ghost">{home.hero.secondaryCta.label}</a>
+        </div>
+        <div class="mt-6 text-sm text-ln-text/60">
+          Global POPs · Panel you’ll actually like · 24/7 support
+        </div>
+      </div>
+      <div class="relative">
+        <div class="absolute -inset-8 rounded-2xl bg-ln-primary/10 blur-2xl"></div>
+        <div class="card relative p-6">
+          <img src="/logo.png" alt="LogicNest" class="mx-auto w-48 opacity-90" />
+          <div class="mt-6 grid grid-cols-3 gap-3 text-center text-sm">
+            <div class="rounded-xl bg-ln-badge/50 py-3 border border-ln-border">NVMe</div>
+            <div class="rounded-xl bg-ln-badge/50 py-3 border border-ln-border">DDoS</div>
+            <div class="rounded-xl bg-ln-badge/50 py-3 border border-ln-border">99.9%+</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="container py-12">
-    <h2 class="text-2xl font-semibold mb-4">Categories</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {groups.map(g => (
-        <a href={`/products/${g.slug}`} class="card p-5 hover:bg-white/5 transition">
-          <div class="text-lg font-semibold">{g.data.title}</div>
-          <p class="text-muted mt-1">{g.data.summary}</p>
-        </a>
+  <!-- Plans row -->
+  <section class="container pb-8">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Minecraft Plans</h2>
+    <p class="text-ln-text/70 mt-2">Pick a plan and launch in minutes.</p>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {plans.map((p) => (
+        <div class={"card p-6 relative " + (p.popular ? "ring-2 ring-ln-ring" : "")}>
+          {p.popular && (
+            <div class="absolute -top-3 right-4 chip border-ln-ring/20 bg-ln-badge">
+              Popular
+            </div>
+          )}
+          <h3 class="text-xl font-semibold">{p.name}</h3>
+          <div class="mt-2 text-3xl font-extrabold">${p.price}<span class="text-base font-medium text-ln-text/70">{p.unit}</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-ln-text/80">
+            {p.features.map((f) => <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-ln-ring"></span>{f}</li>)}
+          </ul>
+          <a href={"/products/" + p.slug} class="btn btn-primary w-full mt-6">Choose plan</a>
+        </div>
       ))}
+    </div>
+
+    <div class="mt-8 text-sm text-ln-text/70">
+      Looking for more? <a class="underline" href="/products">See all plans</a>.
     </div>
   </section>
 </Layout>
