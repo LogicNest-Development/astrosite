@@ -3,6 +3,8 @@ import "../styles/tailwind.css";
 import nav from "../data/nav.json";
 
 const { title = "LogicNest", description = "Game hosting, the LogicNest way", noPad = false } = Astro.props;
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang="en" class="dark">
@@ -14,6 +16,7 @@ const { title = "LogicNest", description = "Game hosting, the LogicNest way", no
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
+    <Header />
     <header class="sticky top-0 z-40 bg-ln-bg/70 backdrop-blur border-b border-ln-border">
       <div class="container flex h-16 items-center justify-between">
         <a href="/" class="flex items-center gap-3">
@@ -36,6 +39,7 @@ const { title = "LogicNest", description = "Game hosting, the LogicNest way", no
       <div class="absolute inset-0 -z-10 bg-[radial-gradient(60%_40%_at_10%_0%,rgba(47,111,255,0.15),transparent_60%),radial-gradient(40%_30%_at_90%_10%,rgba(47,111,255,0.12),transparent_60%)]"></div>
       <slot />
     </main>
+    <Footer />
 
     <footer class="border-t border-ln-border">
       <div class="container py-10 text-sm text-ln-muted flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

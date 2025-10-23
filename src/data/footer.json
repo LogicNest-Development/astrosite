@@ -1,0 +1,48 @@
+{
+  "brand": {
+    "name": "LogicNest Networks",
+    "tagline": "Affordable, reliable game hosting with a control panel you’ll actually enjoy.",
+    "since": "2023–2025"
+  },
+  "social": [
+    { "label": "Discord", "icon": "discord", "href": "https://discord.gg/yourinvite" },
+    { "label": "Panel",   "icon": "panel",   "href": "https://panel.logicnest.biz" }
+  ],
+  "columns": [
+    {
+      "title": "Services",
+      "links": [
+        { "label": "Minecraft Hosting", "href": "/products?group=minecraft" },
+        { "label": "FiveM Hosting",     "href": "/products?group=fivem" },
+        { "label": "TeamSpeak Hosting", "href": "/products?group=teamspeak" },
+        { "label": "Discord Bots",      "href": "/products?group=discord-bots" }
+      ]
+    },
+    {
+      "title": "Support",
+      "links": [
+        { "label": "Tickets", "href": "https://billing.logicnest.biz/submitticket.php" },
+        { "label": "Discord", "href": "https://discord.gg/yourinvite" }
+      ]
+    },
+    {
+      "title": "Company",
+      "links": [
+        { "label": "About Us", "href": "/about" },
+        { "label": "Status",   "href": "/status" },
+        { "label": "Reviews",  "href": "/reviews" }
+      ]
+    },
+    {
+      "title": "Legal",
+      "links": [
+        { "label": "Terms of Service",        "href": "/legal?doc=Terms%20of%20Service" },
+        { "label": "Refund Policy",           "href": "/legal?doc=Refund%20Policy" },
+        { "label": "Service Level Agreement", "href": "/legal?doc=Service%20Level%20Agreement" }
+      ]
+    }
+  ],
+  "badges": [
+    { "img": "/logo.png", "alt": "LogicNest" }
+  ]
+}

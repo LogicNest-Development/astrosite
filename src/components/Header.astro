@@ -1,66 +1,62 @@
 ---
-import nav from "@data/nav.json";
-const { clientAreaUrl } = nav;
-const items = nav.items?.filter((i) => i.enabled !== false) ?? [];
+import nav from "../data/nav.json";
+const site = await import("../content/settings/site.json");
+const brand = { name: (site.default?.name ?? "LogicNest"), logo: "/logo.png" };
 ---
-<header class="sticky top-0 z-40 backdrop-blur bg-black/40 border-b border-white/10">
-  <div class="container h-14 flex items-center justify-between">
-    <a href="/" class="font-bold">LogicNest</a>
 
-    <nav class="hidden md:flex items-center gap-2">
-      {items.map((item) => (
-        item.type === "section" ? (
-          <details class="group relative">
-            <summary class="cursor-pointer px-3 py-2 rounded-xl hover:bg-white/5">{item.label}</summary>
-            <div class="absolute left-0 mt-2 w-[560px] p-4 card">
-              <div class="grid grid-cols-2 gap-3">
-                {(item.children ?? []).map((c) => (
-                  <a href={c.path} class="px-3 py-2 rounded-lg hover:bg-white/5">{c.label}</a>
-                ))}
-              </div>
-            </div>
-          </details>
-        ) : (
-          <a
-            href={item.path}
-            class="px-3 py-2 rounded-xl hover:bg-white/5"
-            target={item.external ? "_blank" : "_self"}
-            rel={item.external ? "noopener noreferrer" : undefined}
-          >
-            {item.label}
-          </a>
-        )
+<header class="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0b1230]/80 backdrop-blur">
+  <div class="container mx-auto flex items-center justify-between gap-4 py-3 px-4">
+    <a href="/" class="flex items-center gap-3">
+      <img src={brand.logo} alt={brand.name} class="h-8 w-8 rounded-md" />
+      <span class="font-semibold tracking-tight text-white">{brand.name}</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-6 text-sm">
+      {nav.items?.map((item) => (
+        <a href={item.href} class="text-white/80 hover:text-white transition-colors">{item.label}</a>
       ))}
+      {nav.cta && (
+        <a href={nav.cta.href} class="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition-colors">
+          {nav.cta.label}
+        </a>
+      )}
     </nav>
 
-    <div class="flex items-center gap-2">
-      {clientAreaUrl && (
-        <a href={clientAreaUrl} class="px-3 py-2 rounded-xl border border-white/10 hover:bg-white/5">Client Area</a>
-      )}
-      <button class="md:hidden px-3 py-2 rounded-xl border border-white/10" onclick="document.getElementById('mnav').showModal()">Menu</button>
-    </div>
+    <!-- Mobile menu button -->
+    <button id="ln-nav-toggle"
+      class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-white/90 hover:bg-white/5"
+      aria-controls="ln-mobile-nav" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
 
-  <!-- mobile -->
-  <dialog id="mnav" class="card w-[92vw] max-w-md p-4">
-    <form method="dialog">
-      <button class="absolute right-3 top-3 px-2 py-1 border rounded-lg border-white/10">✕</button>
-    </form>
-    <div class="mt-6 space-y-2">
-      {items.map((item) => (
-        item.type === "section" ? (
-          <details>
-            <summary class="px-3 py-2 rounded-lg hover:bg-white/5">{item.label}</summary>
-            <div class="pl-3 py-2 space-y-1">
-              {(item.children ?? []).map((c) => (
-                <a href={c.path} class="block px-3 py-2 rounded hover:bg-white/5">{c.label}</a>
-              ))}
-            </div>
-          </details>
-        ) : (
-          <a href={item.path} class="block px-3 py-2 rounded hover:bg-white/5">{item.label}</a>
-        )
+  <!-- Mobile drawer -->
+  <div id="ln-mobile-nav" class="md:hidden hidden border-t border-white/10 bg-[#0b1230]">
+    <nav class="container mx-auto flex flex-col gap-1 py-3 px-4">
+      {nav.items?.map((item) => (
+        <a href={item.href} class="rounded-lg px-3 py-2 text-white/85 hover:bg-white/5">{item.label}</a>
       ))}
-    </div>
-  </dialog>
+      {nav.cta && (
+        <a href={nav.cta.href} class="mt-2 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500">
+          {nav.cta.label}
+        </a>
+      )}
+    </nav>
+  </div>
+
+  <script is:raw>
+    (function () {
+      const btn = document.getElementById('ln-nav-toggle');
+      const menu = document.getElementById('ln-mobile-nav');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => {
+        const wasHidden = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', !wasHidden);
+        btn.setAttribute('aria-expanded', String(wasHidden));
+      });
+    })();
+  </script>
 </header>
