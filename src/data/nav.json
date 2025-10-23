@@ -1,21 +1,6 @@
-{
-  "clientAreaUrl": "https://billing.logicnest.biz",
-  "items": [
-    { "key": "home", "label": "Home", "type": "page", "path": "/", "enabled": true },
-    {
-      "key": "products",
-      "label": "Products",
-      "type": "section",
-      "enabled": true,
-      "children": [
-        { "label": "FiveM Hosting", "path": "/products/fivem" },
-        { "label": "Minecraft Hosting", "path": "/products/minecraft" },
-        { "label": "Discord Bots", "path": "/products/discord-bots" },
-        { "label": "TeamSpeak", "path": "/products/teamspeak" },
-        { "label": "Bundles", "path": "/products/bundles" }
-      ]
-    },
-    { "key": "games", "label": "Games", "type": "page", "path": "/games", "enabled": true },
-    { "key": "legal", "label": "Legal", "type": "page", "path": "/legal", "enabled": true }
-  ]
-}
+[
+  { "label": "Home",     "href": "/" },
+  { "label": "Products", "href": "/products" },
+  { "label": "Games",    "href": "/games" },
+  { "label": "Legal",    "href": "/legal" }
+]

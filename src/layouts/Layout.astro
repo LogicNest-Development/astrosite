@@ -1,55 +1,21 @@
 ---
-import "../styles/tailwind.css";
-import nav from "../data/nav.json";
-
-const { title = "LogicNest", description = "Game hosting, the LogicNest way", noPad = false } = Astro.props;
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+const { title = "LogicNest", description = "Game hosting you’ll actually enjoy." } = Astro.props;
 ---
 
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.ico" />
   </head>
-  <body>
+  <body class="bg-[#0b1225] text-white antialiased">
     <Header />
-    <header class="sticky top-0 z-40 bg-ln-bg/70 backdrop-blur border-b border-ln-border">
-      <div class="container flex h-16 items-center justify-between">
-        <a href="/" class="flex items-center gap-3">
-          <img src="/logo.png" class="h-8 w-8" alt="LogicNest" />
-          <span class="font-semibold tracking-tight">LogicNest</span>
-        </a>
-        <nav class="hidden md:flex items-center gap-6">
-          {nav.items?.map((i) => (
-            <a href={i.href} class="text-sm text-ln-text/80 hover:text-white">{i.label}</a>
-          ))}
-        </nav>
-        <div class="flex items-center gap-2">
-          <a href="/games" class="btn btn-ghost text-sm">Games</a>
-          <a href="/products" class="btn btn-primary text-sm">View Plans</a>
-        </div>
-      </div>
-    </header>
-
-    <main class={noPad ? "" : "pb-20"}>
-      <div class="absolute inset-0 -z-10 bg-[radial-gradient(60%_40%_at_10%_0%,rgba(47,111,255,0.15),transparent_60%),radial-gradient(40%_30%_at_90%_10%,rgba(47,111,255,0.12),transparent_60%)]"></div>
+    <main>
       <slot />
     </main>
     <Footer />
-
-    <footer class="border-t border-ln-border">
-      <div class="container py-10 text-sm text-ln-muted flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <p>© {new Date().getFullYear()} LogicNest Networks. All rights reserved.</p>
-        <div class="flex gap-6">
-          <a href="/legal">Legal</a>
-          <a href="/products">Products</a>
-          <a href="/games">Games</a>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>

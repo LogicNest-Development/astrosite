@@ -2,12 +2,9 @@
   "brand": {
     "name": "LogicNest Networks",
     "tagline": "Affordable, reliable game hosting with a control panel you’ll actually enjoy.",
-    "since": "2023–2025"
+    "discordUrl": "https://discord.gg/logicnest",
+    "statusUrl": "/status"
   },
-  "social": [
-    { "label": "Discord", "icon": "discord", "href": "https://discord.gg/yourinvite" },
-    { "label": "Panel",   "icon": "panel",   "href": "https://panel.logicnest.biz" }
-  ],
   "columns": [
     {
       "title": "Services",
@@ -21,8 +18,8 @@
     {
       "title": "Support",
       "links": [
-        { "label": "Tickets", "href": "https://billing.logicnest.biz/submitticket.php" },
-        { "label": "Discord", "href": "https://discord.gg/yourinvite" }
+        { "label": "Tickets", "href": "https://panel.logicnest.biz/support" },
+        { "label": "Discord", "href": "https://discord.gg/logicnest" }
       ]
     },
     {
@@ -36,13 +33,11 @@
     {
       "title": "Legal",
       "links": [
-        { "label": "Terms of Service",        "href": "/legal?doc=Terms%20of%20Service" },
-        { "label": "Refund Policy",           "href": "/legal?doc=Refund%20Policy" },
-        { "label": "Service Level Agreement", "href": "/legal?doc=Service%20Level%20Agreement" }
+        { "label": "Terms of Service",           "href": "/legal?doc=Terms%20of%20Service" },
+        { "label": "Refund Policy",              "href": "/legal?doc=Refund%20Policy" },
+        { "label": "Service Level Agreement",    "href": "/legal?doc=SLA" }
       ]
     }
   ],
-  "badges": [
-    { "img": "/logo.png", "alt": "LogicNest" }
-  ]
+  "copyright": "© 2025 LogicNest Networks. All rights reserved."
 }
