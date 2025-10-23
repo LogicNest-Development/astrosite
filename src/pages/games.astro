@@ -1,25 +1,30 @@
+cat > src/pages/games.astro <<'ASTRO'
 ---
-// src/pages/games.astro
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-// Load all enabled product groups and sort by `order` (fallback 999)
-const groups = (await getCollection("product-groups", ({ data }) => data.enabled !== false))
-  .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const groups = await getCollection("product-groups", ({ data }) => data.enabled !== false);
 ---
 
 <Layout title="Game Hosting">
-  <section class="max-w-6xl mx-auto px-6 py-12">
+  <section class="mx-auto max-w-6xl px-6 py-12">
     <h1 class="text-3xl font-bold">Game Hosting</h1>
-    <p class="mt-2 opacity-80">Pick a category to see plans.</p>
+    <p class="mt-2 opacity-80">Pick a category to see available plans.</p>
 
     <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {groups.map(({ slug, data }) => (
-        <a href={`/products/${slug}`} class="rounded-2xl border border-white/10 p-6 bg-black/20 hover:bg-white/5 transition">
-          <h3 class="text-xl font-semibold">{data.title}</h3>
-          {data.summary && <p class="mt-2 opacity-80">{data.summary}</p>}
-        </a>
-      ))}
+      {groups
+        .sort((a,b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+        .map((g) => (
+          <a
+            href={`/products/${g.slug}`}
+            class="rounded-2xl border border-white/10 bg-black/20 p-6 shadow-ring hover:border-white/20 transition"
+          >
+            <h2 class="text-xl font-semibold">{g.data.title}</h2>
+            {g.data.summary && <p class="mt-2 opacity-80">{g.data.summary}</p>}
+          </a>
+        ))
+      }
     </div>
   </section>
 </Layout>
+ASTRO
